@@ -19,7 +19,6 @@ function App() {
   const [model, setModel] = useState(null);
   const [image, setImage] = useState(null);
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [loadingGraph, setLoadingGraph] = useState(false);
   const inputRef = useRef(null);
   const barColors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#FC33FF", "#F6FF33"];
@@ -61,12 +60,10 @@ function App() {
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setImage(URL.createObjectURL(e.target.files[0]));
-      setLoading(false);
     }
   };
 
   const onUploadImage = () => {
-    setLoading(true);
     inputRef.current?.click();
   };
 
@@ -89,17 +86,9 @@ function App() {
                   onChange={onImageChange}
                 />
                 <button className="btn btn-primary" onClick={onUploadImage}>
-                  {loading && (
-                    <span
-                      className="spinner-border text-warning"
-                      role="status"
-                    ></span>
-                  )}
-                  {!loading && (
-                    <span>
-                      <i className="bi bi-upload"></i> Upload Pictures
-                    </span>
-                  )}
+                  <span>
+                    <i className="bi bi-upload"></i> Upload Pictures
+                  </span>
                 </button>
               </div>
             </div>
